@@ -96,4 +96,4 @@ jobs:
       - name: Upload Packages
         run: |
           dotnet nuget add source --username USERNAME --password "${{ secrets.GITHUB_TOKEN }}" --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-          dotnet nuget push "**/*.nupkg" --source github --skip-duplicate --no-symbols
+          dotnet nuget push "**/*linux-s390x*.nupkg" --source github --skip-duplicate --no-symbols
