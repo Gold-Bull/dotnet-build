@@ -1,0 +1,20 @@
+name: .NET Runtime (s390x)
+
+on:
+  workflow_dispatch:
+
+env:
+  RUNTIME_OS: Linux
+  RUNTIME_ARCH: s390x
+  RUNTIME_CONFIGURATION: Release
+
+jobs:
+  run:
+    uses: ./.github/workflows/build-and-publish.yml
+    with:
+      repo-url: dotnet/runtime
+      checkout-tag: v6.0.16
+      build-commands: |
+        export ROOTFS_DIR=/crossfs/$(RUNTIME_ARCH)
+        chmod +x ./build.sh
+        ./build.sh --subset mono+libs+host+packs --cross --os ${{ env.RUNTIME_OS }} --arch ${{ env.RUNTIME_ARCH }} --configuration ${{ env.RUNTIME_CONFIGURATION }}

@@ -1,0 +1,46 @@
+name: Build And Publish
+
+on:
+  workflow_call:
+    inputs:
+      repo-url:
+        description: 'Repository URL to checkout'
+        required: true
+        type: string
+      checkout-tag:
+        description: 'Repository tag to checkout'
+        required: true
+        type: string
+      container:
+        description: 'Container specs to use for build'
+        default: '{ "image": "ghcr.io/gold-bull/dotnet-build-deps:ubuntu-22.04-latest" }'
+        required: false
+        type: string
+      build-commands:
+        description: 'Commands to run post checkout'
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ${{ fromJSON(inputs.container-image) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: self
+
+      - name: Checkout .NET repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repo-url }}
+          submodules: true
+          ref: ${{ inputs.checkout-tag }}
+          path: dotnet
+
+      - name: Run commands
+        run: ${{ inputs.build-commands }}
+        working-directory: ./dotnet
+
+      
