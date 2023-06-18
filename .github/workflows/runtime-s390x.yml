@@ -24,7 +24,7 @@ jobs:
     secrets: inherit
     with:
       repo-url: dotnet/runtime
-      checkout-tag: v6.0.16
+      checkout-tag: v6.0.3
       runtime-arch: s390x
       runtime-configuration: Release
       build-commands: |
