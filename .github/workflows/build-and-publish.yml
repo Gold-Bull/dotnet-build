@@ -69,8 +69,8 @@ jobs:
         with:
           name: nuget-packages
           path: |
-            artifacts/packages/${{ env.RUNTIME_CONFIGURATION }}/Shipping/**/*.nupkg
-            !artifacts/packages/${{ env.RUNTIME_CONFIGURATION }}/Shipping/**/*.symbols.nupkg
+            dotnet/artifacts/packages/${{ env.RUNTIME_CONFIGURATION }}/Shipping/**/*.nupkg
+            !dotnet/artifacts/packages/${{ env.RUNTIME_CONFIGURATION }}/Shipping/**/*.symbols.nupkg
           retention-days: ${{ startsWith(github.ref, 'refs/heads/releases/') && 30 || 7 }}
 
       - name: Upload artifacts
@@ -78,7 +78,7 @@ jobs:
         with:
           name: archives
           path: |
-            artifacts/packages/${{ env.RUNTIME_CONFIGURATION }}/Shipping/**/*.tar.*
+            dotnet/artifacts/packages/${{ env.RUNTIME_CONFIGURATION }}/Shipping/**/*.tar.*
           retention-days: ${{ startsWith(github.ref, 'refs/heads/releases/') && 30 || 7 }}
 
   publish:
