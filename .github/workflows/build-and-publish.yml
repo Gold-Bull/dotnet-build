@@ -38,6 +38,9 @@ env:
   RUNTIME_OS: ${{ inputs.runtime-os }}
   RUNTIME_ARCH: ${{ inputs.runtime-arch }}
   RUNTIME_CONFIGURATION: ${{ inputs.runtime-configuration }}
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 jobs:
   build:
