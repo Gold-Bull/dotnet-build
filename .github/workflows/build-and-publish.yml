@@ -84,11 +84,6 @@ jobs:
     needs: build
     concurrency: packages-publish
     environment: packages-publish
-    permissions:
-      actions: read
-      contents: read
-      deployments: read
-      packages: write
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v3
