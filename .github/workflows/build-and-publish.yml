@@ -11,6 +11,19 @@ on:
         description: 'Repository tag to checkout'
         required: true
         type: string
+      runtime-os:
+        description: 'Type of the OS to build dotnet'
+        default: 'Linux'
+        required: false
+        type: string
+      runtime-arch:
+        description: 'Architecture of the OS to build dotnet'
+        required: true
+        type: string
+      runtime-configuration:
+        description: 'Configuration to build dotnet'
+        required: true
+        type: string
       container:
         description: 'Container specs to use for build'
         default: '{ "image": "ghcr.io/gold-bull/dotnet-build-deps:ubuntu-22.04-latest" }'
@@ -20,6 +33,11 @@ on:
         description: 'Commands to run post checkout'
         required: true
         type: string
+
+env:
+  RUNTIME_OS: ${{ inputs.runtime-os }}
+  RUNTIME_ARCH: ${{ inputs.runtime-arch }}
+  RUNTIME_CONFIGURATION: ${{ inputs.runtime-configuration }}
 
 jobs:
   build:
@@ -42,5 +60,3 @@ jobs:
       - name: Run commands
         run: ${{ inputs.build-commands }}
         working-directory: ./dotnet
-
-      
