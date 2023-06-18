@@ -1,0 +1,33 @@
+name: ASP.NET (s390x)
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - 'releases/**'
+    tags:
+      - v*
+    paths-ignore:
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
+
+jobs:
+  build-and-publish:
+    uses: ./.github/workflows/build-and-publish.yml
+    permissions:
+      actions: read
+      contents: read
+      deployments: read
+      packages: write
+    secrets: inherit
+    with:
+      repo-url: dotnet/aspnetcore
+      checkout-tag: v6.0.16
+      runtime-arch: s390x
+      runtime-configuration: Release
+      build-commands: |
+        export ROOTFS_DIR=/crossfs/${RUNTIME_ARCH}
+        chmod +x ./eng/build.sh
+        ./eng/build.sh --os-name ${RUNTIME_OS} --arch ${RUNTIME_ARCH} --configuration ${RUNTIME_CONFIGURATION} --pack --all --no-build-nodejs --no-build-java --no-build-installers /p:OnlyPackPlatformSpecificPackages=true /p:SkipTestBuild=true /p:PostBuildSign=true /p:DotNetBuildFromSource=true
