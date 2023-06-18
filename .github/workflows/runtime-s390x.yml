@@ -3,8 +3,18 @@ name: .NET Runtime (s390x)
 on:
   workflow_dispatch:
 
+  push:
+    branches:
+      - 'releases/**'
+    tags:
+      - v*
+    paths-ignore:
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
+
 jobs:
-  run:
+  build-and-publish:
     uses: ./.github/workflows/build-and-publish.yml
     with:
       repo-url: dotnet/runtime
