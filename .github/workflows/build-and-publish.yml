@@ -24,7 +24,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ${{ fromJSON(inputs.container-image) }}
+    container: ${{ fromJSON(inputs.container) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
