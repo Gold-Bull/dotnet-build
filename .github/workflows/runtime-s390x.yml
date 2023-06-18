@@ -12,6 +12,6 @@ jobs:
       runtime-arch: s390x
       runtime-configuration: Release
       build-commands: |
-        export ROOTFS_DIR=/crossfs/$(RUNTIME_ARCH)
+        export ROOTFS_DIR=/crossfs/${RUNTIME_ARCH}
         chmod +x ./build.sh
-        ./build.sh --subset mono+libs+host+packs --cross --os $(RUNTIME_OS) --arch $(RUNTIME_ARCH) --configuration $(RUNTIME_CONFIGURATION)
+        ./build.sh --subset mono+libs+host+packs --cross --os ${RUNTIME_OS} --arch ${RUNTIME_ARCH} --configuration ${RUNTIME_CONFIGURATION}
