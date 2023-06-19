@@ -2,6 +2,10 @@ name: ASP.NET (s390x)
 
 on:
   workflow_dispatch:
+    version:
+      description: 'Version to build'
+      required: true
+      type: string
 
   push:
     branches:
@@ -23,7 +27,7 @@ jobs:
     secrets: inherit
     with:
       repo-url: dotnet/aspnetcore
-      checkout-tag: v6.0.0
+      checkout-tag: v${{ github.event_name	 == 'workflow_dispatch' && inputs.version || '6.0.16' }}
       runtime-arch: s390x
       runtime-configuration: Release
       build-commands: |
