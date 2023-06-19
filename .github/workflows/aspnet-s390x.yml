@@ -3,15 +3,14 @@ name: ASP.NET (s390x)
 on:
   workflow_dispatch:
 
-  #push:
-  #  branches:
-  #    - 'releases/**'
-  #  tags:
-  #    - v*
-  #  paths-ignore:
-  #    - '.gitignore'
-  #    - 'LICENSE'
-  #    - 'README.md'
+  push:
+    branches:
+      - 'releases/**'
+    tags:
+      - v*
+    paths:
+      - '.github/workflows/aspnet-s390x.yml'
+      - '.github/workflows/build-and-publish.yml'
 
 jobs:
   build-and-publish:
