@@ -3,15 +3,15 @@ name: ASP.NET (s390x)
 on:
   workflow_dispatch:
 
-  push:
-    branches:
-      - 'releases/**'
-    tags:
-      - v*
-    paths-ignore:
-      - '.gitignore'
-      - 'LICENSE'
-      - 'README.md'
+  #push:
+  #  branches:
+  #    - 'releases/**'
+  #  tags:
+  #    - v*
+  #  paths-ignore:
+  #    - '.gitignore'
+  #    - 'LICENSE'
+  #    - 'README.md'
 
 jobs:
   build-and-publish:
