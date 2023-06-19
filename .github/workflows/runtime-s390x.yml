@@ -31,6 +31,8 @@ jobs:
       runtime-arch: s390x
       runtime-configuration: Release
       build-commands: |
+        git apply ../self/patches/001_init-complier_lld.patch
+        
         export ROOTFS_DIR=/crossfs/${RUNTIME_ARCH}
         chmod +x ./build.sh
         ./build.sh --subset mono+libs+host+packs --cross --os ${RUNTIME_OS} --arch ${RUNTIME_ARCH} --configuration ${RUNTIME_CONFIGURATION}
