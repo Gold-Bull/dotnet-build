@@ -2,10 +2,11 @@ name: .NET Runtime (s390x)
 
 on:
   workflow_dispatch:
-    version:
-      description: 'Version to build'
-      required: true
-      type: string
+    inputs:
+      version:
+        description: 'Version to build'
+        required: true
+        type: string
 
   push:
     branches:
@@ -27,7 +28,7 @@ jobs:
     secrets: inherit
     with:
       repo-url: dotnet/runtime
-      checkout-tag: v${{ github.event_name	 == 'workflow_dispatch' && inputs.version || '6.0.16' }}
+      checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.16' }}
       runtime-arch: s390x
       runtime-configuration: Release
       build-commands: |
