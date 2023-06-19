@@ -96,5 +96,6 @@ jobs:
       - name: Upload Packages
         run: |
           dotnet nuget push "**/*linux-s390x*.nupkg" \
+          --skip-duplicate \
           --api-key ${{ secrets.GITHUB_TOKEN }} \
           --source https://nuget.pkg.github.com/${{ github.repository_owner }}
