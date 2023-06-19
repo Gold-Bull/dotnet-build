@@ -23,7 +23,7 @@ jobs:
     secrets: inherit
     with:
       repo-url: dotnet/aspnetcore
-      checkout-tag: v6.0.16
+      checkout-tag: v6.0.0
       runtime-arch: s390x
       runtime-configuration: Release
       build-commands: |
