@@ -8,10 +8,9 @@ on:
       - 'releases/**'
     tags:
       - v*
-    paths-ignore:
-      - '.gitignore'
-      - 'LICENSE'
-      - 'README.md'
+    paths:
+      - '.github/workflows/runtime-s390x.yml'
+      - '.github/workflows/build-and-publish.yml'
 
 jobs:
   build-and-publish:
