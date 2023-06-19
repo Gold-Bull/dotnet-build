@@ -1,5 +1,5 @@
 name: ASP.NET (s390x)
-run-name: "Event: ${{ github.event_name }}; Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.16' }}"
+run-name: "Event: ${{ github.event_name }}; Branch: ${{ github.ref_name }}; Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.16' }}"
 
 on:
   workflow_dispatch:
