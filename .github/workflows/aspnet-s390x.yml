@@ -1,5 +1,5 @@
 name: ASP.NET (s390x)
-run-name: "Event: ${{ github.event_name }}; Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.16' }}"
+run-name: "Event: ${{ github.event_name }}; Branch: ${{ github.ref_name }}; Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.27' }}"
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
 
   push:
     branches:
-      - 'releases/**'
+      - '*'
     tags:
       - v*
     paths:
@@ -29,7 +29,7 @@ jobs:
     secrets: inherit
     with:
       repo-url: dotnet/aspnetcore
-      checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.16' }}
+      checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.27' }}
       runtime-arch: s390x
       runtime-configuration: Release
       build-commands: |
