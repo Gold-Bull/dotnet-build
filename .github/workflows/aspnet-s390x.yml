@@ -9,7 +9,7 @@ on:
     branches:
     - '**'
     paths:
-    - '.github/workflows/runtime-s390x.yml'
+    - '.github/workflows/aspnet-s390x.yml'
     - '.github/workflows/build-and-publish.yml'
   pull_request:
     branches:
