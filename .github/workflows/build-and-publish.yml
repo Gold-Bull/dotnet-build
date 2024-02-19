@@ -48,12 +48,12 @@ jobs:
     container: ${{ fromJSON(inputs.container) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: self
 
       - name: Checkout .NET repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repo-url }}
           submodules: true
@@ -65,7 +65,7 @@ jobs:
         working-directory: ./dotnet
 
       - name: Upload NuGet Packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nuget-packages
           path: |
@@ -74,7 +74,7 @@ jobs:
           retention-days: ${{ startsWith(github.ref, 'refs/heads/releases/') && 30 || 7 }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: archives
           path: |
@@ -89,7 +89,7 @@ jobs:
     environment: packages-publish
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nuget-packages
 
