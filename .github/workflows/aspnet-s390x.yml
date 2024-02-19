@@ -11,12 +11,17 @@ on:
 
   push:
     branches:
-      - '*'
+      - '**'
     tags:
       - v*
     paths:
       - '.github/workflows/aspnet-s390x.yml'
       - '.github/workflows/build-and-publish.yml'
+
+  pull_request:
+    branches:
+    - 'main'
+    - 'releases/*'
 
 jobs:
   build-and-publish:
