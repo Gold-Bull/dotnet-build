@@ -1,27 +1,24 @@
 name: .NET Runtime (s390x)
-run-name: "Event: ${{ github.event_name }}; Branch: ${{ github.ref_name }}; Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '8.0.2' }}"
+run-name: "Event: ${{ github.event_name }}; ${{ github.event_name == 'pull_request' && format('PR: {0}; ', github.event.number) || format('Branch: {0}; ', github.ref_name)}}Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '8.0.2' }}"
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to build'
-        required: true
-        type: string
-
   push:
     branches:
-      - '**'
+    - '**'
     tags:
-      - v*
+    - v*
     paths:
-      - '.github/workflows/runtime-s390x.yml'
-      - '.github/workflows/build-and-publish.yml'
+    - '.github/workflows/runtime-s390x.yml'
+    - '.github/workflows/build-and-publish.yml'
 
   pull_request:
     branches:
     - 'main'
     - 'releases/*'
+    types:
+    - opened
+    - reopened
+    - synchronize
 
 jobs:
   build-and-publish:
@@ -33,6 +30,7 @@ jobs:
       packages: write
     secrets: inherit
     with:
+      job-name-prefix: ${{ github.workflow }}
       repo-url: dotnet/runtime
       checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '8.0.2' }}
       runtime-arch: s390x
