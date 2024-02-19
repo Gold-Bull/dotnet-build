@@ -2,15 +2,15 @@ name: .NET Runtime (s390x)
 run-name: "Event: ${{ github.event_name }}; ${{ github.event_name == 'pull_request' && format('PR: {0}; ', github.event.number) || format('Branch: {0}; ', github.ref_name)}}Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.27' }}"
 
 on:
+  create:
+    branches:
+    - 'releases/*'
   push:
     branches:
     - '**'
-    tags:
-    - v*
     paths:
     - '.github/workflows/runtime-s390x.yml'
     - '.github/workflows/build-and-publish.yml'
-
   pull_request:
     branches:
     - 'main'
