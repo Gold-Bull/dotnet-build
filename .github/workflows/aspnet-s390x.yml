@@ -6,7 +6,7 @@ on:
     inputs:
       version:
         description: 'Version'
-        required: false
+        required: true
         default: '6.0.27'
   create:
     branches:
