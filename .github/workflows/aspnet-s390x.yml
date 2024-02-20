@@ -1,22 +1,30 @@
 name: ASP.NET (s390x)
-run-name: "Event: ${{ github.event_name }}; Branch: ${{ github.ref_name }}; Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.27' }}"
+run-name: "Event: ${{ github.event_name }}; ${{ github.event_name == 'pull_request' && format('PR: {0}; ', github.event.number) || format('Branch: {0}; ', github.ref_name)}}${{ github.event_name == 'workflow_dispatch' && format('Version: {0}', inputs.version) || '' }}"
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to build'
-        required: true
-        type: string
-
+        description: 'Version'
+        required: false
+        default: '6.0.27'
+  create:
+    branches:
+    - 'releases/*'
   push:
     branches:
-      - '*'
-    tags:
-      - v*
+    - '**'
     paths:
-      - '.github/workflows/aspnet-s390x.yml'
-      - '.github/workflows/build-and-publish.yml'
+    - '.github/workflows/aspnet-s390x.yml'
+    - '.github/workflows/build-and-publish.yml'
+  pull_request:
+    branches:
+    - 'main'
+    - 'releases/*'
+    types:
+    - opened
+    - reopened
+    - synchronize
 
 jobs:
   build-and-publish:
@@ -28,6 +36,7 @@ jobs:
       packages: write
     secrets: inherit
     with:
+      job-name-prefix: "${{ github.workflow }} "
       repo-url: dotnet/aspnetcore
       checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.27' }}
       runtime-arch: s390x
