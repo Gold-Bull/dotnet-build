@@ -1,7 +1,13 @@
 name: ASP.NET (s390x)
-run-name: "Event: ${{ github.event_name }}; ${{ github.event_name == 'pull_request' && format('PR: {0}; ', github.event.number) || format('Branch: {0}; ', github.ref_name)}}Version: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '8.0.2' }}"
+run-name: "Event: ${{ github.event_name }}; ${{ github.event_name == 'pull_request' && format('PR: {0}; ', github.event.number) || format('Branch: {0}; ', github.ref_name)}}${{ github.event_name == 'workflow_dispatch' && format('Version: {0}', inputs.version) || '' }}"
 
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+          description: 'Version'
+          required: false
+          default: '8.0.2'
   create:
     branches:
     - 'releases/*'
@@ -30,7 +36,7 @@ jobs:
       packages: write
     secrets: inherit
     with:
-      job-name-prefix: ${{ github.workflow }}
+      job-name-prefix: "${{ github.workflow }} "
       repo-url: dotnet/aspnetcore
       checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '8.0.2' }}
       runtime-arch: s390x
