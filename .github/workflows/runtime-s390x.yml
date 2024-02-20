@@ -36,7 +36,7 @@ jobs:
       packages: write
     secrets: inherit
     with:
-      job-name-prefix: ${{ github.workflow }}
+      job-name-prefix: "${{ github.workflow }} "
       repo-url: dotnet/runtime
       checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '8.0.2' }}
       runtime-arch: s390x
