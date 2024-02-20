@@ -6,7 +6,7 @@ on:
     inputs:
       version:
         description: 'Version'
-        required: true
+        required: false
         default: '6.0.27'
   create:
     branches:
@@ -36,7 +36,7 @@ jobs:
       packages: write
     secrets: inherit
     with:
-      job-name-prefix: ${{ github.workflow }}
+      job-name-prefix: "${{ github.workflow }} "
       repo-url: dotnet/runtime
       checkout-tag: v${{ github.event_name == 'workflow_dispatch' && inputs.version || '6.0.27' }}
       runtime-arch: s390x
